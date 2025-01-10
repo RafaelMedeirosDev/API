@@ -6,7 +6,7 @@ const listar = async (req, res) => {
         const alunos = await Aluno.findAll(); //Lista todos os alunos criados no banco
         res.status(200).json(alunos)
     } catch (error) {
-        res.status(500).json({error: 'Erro ao listar os alunos!'})
+        res.status(500).json({error: 'Erro ao listar os alunos!', detalhes: error.message})
     }
 }
 
@@ -22,7 +22,7 @@ const listarPorId = async (req, res) => {
         res.status(200).json(aluno)
         
     } catch (error) {
-        res.status(500).json({error: 'Erro ao listar os alunos!'})
+        res.status(500).json({error: 'Erro ao listar os alunos!', detalhes: error.message})
     }
 }
 
@@ -35,7 +35,7 @@ const cadastrar = async (req, res) => {
         res.status(201).json(novoAluno)
 
     } catch (error) {
-        res.status(500).json({error: "Erro ao cadastrar aluno!"})
+        res.status(500).json({error: "Erro ao cadastrar aluno!", detalhes: error.message})
     }
 }
 
@@ -54,7 +54,7 @@ const atualizar = async (req, res) => {
         res.status(200).json(aluno)
 
     } catch (error) {
-        res.status(500).json({error: 'Erro ao tentar atualizar aluno!'})
+        res.status(500).json({error: 'Erro ao tentar atualizar aluno!', detalhes: error.message})
     }
 }
 
@@ -71,7 +71,7 @@ const deletar = async (req, res) => {
         res.status(200).json({msg: 'Aluno excluido com sucesso!'})
 
     } catch (error) {
-        res.status(500).json({error: 'Erro ao tentar excluir aluno!'})
+        res.status(500).json({error: 'Erro ao tentar excluir aluno!', detalhes: error.message})
     }
 }
 
@@ -82,7 +82,7 @@ const deletarTodos = async (req, res) => {
         res.status(200).json({msg: 'Todos os alunos foram excluidos com sucesso!'})
 
     } catch (error) {
-        res.status(500).json({error: 'Erro ao tentar excluir!'})
+        res.status(500).json({error: 'Erro ao tentar excluir!', detalhes: error.message})
     }
 }
 
