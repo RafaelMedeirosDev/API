@@ -13,10 +13,10 @@ const listar = async (req, res) => {
 //Listar por id
 const listarPorId = async (req, res) => {
     try {
-        const {id} = req.body
+        const {id} = req.params;
         const aluno = await Aluno.findByPk(id)
         if(!aluno){
-            res.status(404).json({msg: 'Aluno não encontrado'})
+            return res.status(404).json({msg: 'Aluno não encontrado'})
         }
 
         res.status(200).json(aluno)
@@ -43,11 +43,11 @@ const cadastrar = async (req, res) => {
 const atualizar = async (req, res) => {
     try {
         //Se no localhost:3000/api/aluno/1
-        const {id} = req.body
+        const {id} = req.params;
         const {nome, notas, email, senha} = req.body;
         const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
-            res.status(404).json({msg: 'Aluno não encontrado'})
+            return res.status(404).json({msg: 'Aluno não encontrado'})
         }
 
         await aluno.update({nome, notas, email, senha}) //Faz a atualização no banco de dados.
@@ -61,10 +61,10 @@ const atualizar = async (req, res) => {
 //Deletar
 const deletar = async (req, res) => {
     try {       
-        const {id} = req.body
-        const aluno = await Aluno.findByPk({id})  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
+        const {id} = req.params;
+        const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
-            res.status(404).json({msg: 'Aluno não encontrado'})
+            return res.status(404).json({msg: 'Aluno não encontrado'})
         }
 
         await aluno.destroy() //destroy (Exclui) o aluno do banco de dados.
@@ -78,7 +78,7 @@ const deletar = async (req, res) => {
 //Deletar todos
 const deletarTodos = async (req, res) => {
     try {       
-        await Aluno.destroyAll() //destroy (Exclui) o aluno do banco de dados.
+        await Aluno.destroy({where: {}}) //destroy (Exclui) o aluno do banco de dados.
         res.status(200).json({msg: 'Todos os alunos foram excluidos com sucesso!'})
 
     } catch (error) {

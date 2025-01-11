@@ -1,3 +1,35 @@
-### Rota get local
+### Rota GET para listar aluno
 
 GET http://localhost:3000/api/aluno
+
+
+### Rota Post para cadastrar aluno
+
+POST http://localhost:3000/api/aluno/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Josét",
+    "notas": 50.50,
+    "email": "josette@senac.com.br",
+    "senha": "12345678"
+}
+
+### Rota PUT para atualizar informações
+PUT http://localhost:3000/api/aluno/editar/1
+Content-Type: application/json
+
+{
+    "nome": "José Editado",
+    "notas": 50.50,
+    "email": "jose@senac.com.br",
+    "senha": "12345678"
+}
+
+### Rota DELETE para atualizar informações
+DELETE http://localhost:3000/api/aluno/deletar/1
+Content-Type: application/json
+
+### Rota DELETE para atualizar informações
+DELETE http://localhost:3000/api/aluno/deletar
+Content-Type: application/json
