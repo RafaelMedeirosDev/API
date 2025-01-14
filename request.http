@@ -1,7 +1,7 @@
 ### Rota GET para listar aluno
 
 GET http://localhost:3000/api/aluno
-
+Content-Type: application/json
 
 ### Rota Post para cadastrar aluno
 
@@ -9,9 +9,9 @@ POST http://localhost:3000/api/aluno/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Josét",
+    "nome": "Josédt",
     "notas": 50.50,
-    "email": "josette@senac.com.br",
+    "email": "josdette@senac.com.br",
     "senha": "12345678"
 }
 

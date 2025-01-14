@@ -1,4 +1,35 @@
 const Aluno = require('../models/index');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+
+dotenv.config();
+
+
+//Login
+const login = async (req, res) => {
+    try {
+        const {email, senha} = req.body;
+        if(!email || !senha){
+            return res.status(400).json({msg: 'Obrigatório fornercer email e senha!'})
+        }
+        const aluno = await Aluno.findOne({where: email})
+        if(!aluno){
+            return res.status(401).json({msg: 'Usuário não encontrado!'})
+        }
+        const senhaValida = await bcrypt.compare(senha, aluno.senha)
+        if(!senhaValida){
+            return res.status(401).json({msg: 'Senha inválida!'})
+        }
+
+        const token = jwt.sign({id: aluno.id, email: aluno.email}, process.env.SECRET_KEY, {expiresIn: '24h'})
+        res.status(200).json({msg: 'Usuário autenticado!', token});
+
+    } catch (error) {
+        
+    }
+}
+
 
 // Listar - Read
 const listar = async (req, res) => {
@@ -86,4 +117,4 @@ const deletarTodos = async (req, res) => {
     }
 }
 
-module.exports = { listar, cadastrar, atualizar, deletar, deletarTodos, listarPorId};
+module.exports = { listar, cadastrar, atualizar, deletar, deletarTodos, listarPorId, login};

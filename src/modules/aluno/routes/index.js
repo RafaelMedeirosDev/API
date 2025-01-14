@@ -1,6 +1,6 @@
 const express = require('express')
 const route_aluno = express.Router();
-const { listar, cadastrar, atualizar, deletar, deletarTodos, listarPorId} = require('../controller/index')
+const { listar, cadastrar, atualizar, deletar, deletarTodos, listarPorId, login} = require('../controller/index')
 
 
 
@@ -28,6 +28,9 @@ route_aluno.delete('/deletar/:id', deletar)
 // http://localhost:3000/aluno/deletar
 route_aluno.delete('/deletar', deletarTodos)
 
+//Login aluno
+// http://localhost:3000/aluno/login
+route_aluno.post('/login', login)
 
 
 
