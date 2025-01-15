@@ -9,9 +9,9 @@ POST http://localhost:3000/api/aluno/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Josédt",
-    "notas": 50.50,
-    "email": "josdette@senac.com.br",
+    "nome": "José",
+    "notas": 70,
+    "email": "jose@senac.com.br",
     "senha": "12345678"
 }
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 {
     "nome": "José Editado",
-    "notas": 50.50,
+    "notas": 70,
     "email": "jose@senac.com.br",
     "senha": "12345678"
 }
@@ -33,3 +33,11 @@ Content-Type: application/json
 ### Rota DELETE para atualizar informações
 DELETE http://localhost:3000/api/aluno/deletar
 Content-Type: application/json
+
+### login aluno
+POST http://localhost:3000/api/aluno/login
+Content-Type: application/json
+{
+    "email": "jose@senac.com.br",
+    "senha": "12345678"
+}

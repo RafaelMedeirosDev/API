@@ -13,38 +13,38 @@ const login = async (req, res) => {
         if(!email || !senha){
             return res.status(400).json({msg: 'Obrigatório fornercer email e senha!'})
         }
-        const aluno = await Aluno.findOne({where: email})
+        const aluno = await Aluno.findOne({where: {email}})
         if(!aluno){
-            return res.status(401).json({msg: 'Usuário não encontrado!'})
+            return res.status(401).json({msg: 'Usuário não encontrado!', detalhes: error.message})
         }
         const senhaValida = await bcrypt.compare(senha, aluno.senha)
         if(!senhaValida){
-            return res.status(401).json({msg: 'Senha inválida!'})
+            return res.status(401).json({msg: 'Senha inválida!', detalhes: error.message})
         }
 
         const token = jwt.sign({id: aluno.id, email: aluno.email}, process.env.SECRET_KEY, {expiresIn: '24h'})
         res.status(200).json({msg: 'Usuário autenticado!', token});
 
     } catch (error) {
-        
+        res.status(500).json({msg: 'Erro no servidor!', detalhes: error.message})
     }
 }
 
 
 // Listar - Read
-const listar = async (req, res) => {
-    try {
-        const alunos = await Aluno.findAll(); //Lista todos os alunos criados no banco
-        res.status(200).json(alunos)
-    } catch (error) {
-        res.status(500).json({error: 'Erro ao listar os alunos!', detalhes: error.message})
-    }
-}
+// const listar = async (req, res) => {
+//     try {
+//         const alunos = await Aluno.findAll(); //Lista todos os alunos criados no banco
+//         res.status(200).json(alunos)
+//     } catch (error) {
+//         res.status(500).json({error: 'Erro ao listar os alunos!', detalhes: error.message})
+//     }
+// }
 
 //Listar por id
 const listarPorId = async (req, res) => {
     try {
-        const {id} = req.params;
+        const {id} = req.aluno.params;
         const aluno = await Aluno.findByPk(id)
         if(!aluno){
             return res.status(404).json({msg: 'Aluno não encontrado'})
@@ -74,7 +74,7 @@ const cadastrar = async (req, res) => {
 const atualizar = async (req, res) => {
     try {
         //Se no localhost:3000/api/aluno/1
-        const {id} = req.params;
+        const {id} = req.aluno.params;
         const {nome, notas, email, senha} = req.body;
         const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
@@ -92,7 +92,7 @@ const atualizar = async (req, res) => {
 //Deletar
 const deletar = async (req, res) => {
     try {       
-        const {id} = req.params;
+        const {id} = req.aluno.params;
         const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
             return res.status(404).json({msg: 'Aluno não encontrado'})
@@ -107,14 +107,14 @@ const deletar = async (req, res) => {
 }
 
 //Deletar todos
-const deletarTodos = async (req, res) => {
-    try {       
-        await Aluno.destroy({where: {}}) //destroy (Exclui) o aluno do banco de dados.
-        res.status(200).json({msg: 'Todos os alunos foram excluidos com sucesso!'})
+// const deletarTodos = async (req, res) => {
+//     try {       
+//         await Aluno.destroy({where: {}}) //destroy (Exclui) o aluno do banco de dados.
+//         res.status(200).json({msg: 'Todos os alunos foram excluidos com sucesso!'})
 
-    } catch (error) {
-        res.status(500).json({error: 'Erro ao tentar excluir!', detalhes: error.message})
-    }
-}
+//     } catch (error) {
+//         res.status(500).json({error: 'Erro ao tentar excluir!', detalhes: error.message})
+//     }
+// }
 
-module.exports = { listar, cadastrar, atualizar, deletar, deletarTodos, listarPorId, login};
+module.exports = { cadastrar, atualizar, deletar, listarPorId, login};
