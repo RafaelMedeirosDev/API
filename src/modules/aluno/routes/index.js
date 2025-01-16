@@ -1,6 +1,6 @@
 const express = require('express')
 const route_aluno = express.Router();
-const { cadastrar, atualizarPerfil, deletarPerfil, listarPerfil} = require('../controller/index')
+const { login, cadastrar, atualizarPerfil, deletarPerfil, listarPerfil} = require('../controller/index')
 const autenticar = require('../../../middleware/autenticar')
 
 

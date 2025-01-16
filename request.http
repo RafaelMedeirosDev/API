@@ -1,7 +1,9 @@
-### Rota GET para listar aluno OBS:(inserir o token de login no Authorization: Bearer )
+### Rota GET para listar aluno 
 GET http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb3NlQHNlbmFjLmNvbS5iciIsImlhdCI6MTczNzA2OTc2MiwiZXhwIjoxNzM3MTU2MTYyfQ.ZnhXwn7nj7xiMd8TYNU2IfgduZQ_Xd0LE3sl8EDhOuA
+
+
 
 ### Rota Post para cadastrar aluno
 POST http://localhost:3000/api/aluno/cadastrar
@@ -14,10 +16,11 @@ Content-Type: application/json
     "senha": "12345678"
 }
 
-### Rota PUT para atualizar informações OBS:(inserir o token de login no Authorization: Bearer )
+### Rota PUT para atualizar informações 
 PUT http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
-Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb3NlQHNlbmFjLmNvbS5iciIsImlhdCI6MTczNzA2OTc2MiwiZXhwIjoxNzM3MTU2MTYyfQ.ZnhXwn7nj7xiMd8TYNU2IfgduZQ_Xd0LE3sl8EDhOuA
+
 
 {
     "nome": "José Editado",
@@ -29,11 +32,14 @@ Bearer
 ### Rota DELETE para atualizar informações
 DELETE http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb3NlQHNlbmFjLmNvbS5iciIsImlhdCI6MTczNzA2OTc2MiwiZXhwIjoxNzM3MTU2MTYyfQ.ZnhXwn7nj7xiMd8TYNU2IfgduZQ_Xd0LE3sl8EDhOuA
+
 
 
 ### login aluno
 POST http://localhost:3000/api/aluno/login
 Content-Type: application/json
+
 {
     "email": "jose@senac.com.br",
     "senha": "12345678"
