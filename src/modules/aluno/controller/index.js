@@ -42,9 +42,9 @@ const login = async (req, res) => {
 // }
 
 //Listar por id
-const listarPorId = async (req, res) => {
+const listarPerfil = async (req, res) => {
     try {
-        const {id} = req.aluno.params;
+        const id = req.aluno.id;
         const aluno = await Aluno.findByPk(id)
         if(!aluno){
             return res.status(404).json({msg: 'Aluno não encontrado'})
@@ -71,10 +71,10 @@ const cadastrar = async (req, res) => {
 }
 
 //Editar
-const atualizar = async (req, res) => {
+const atualizarPerfil = async (req, res) => {
     try {
         //Se no localhost:3000/api/aluno/1
-        const {id} = req.aluno.params;
+        const id = req.aluno.id;
         const {nome, notas, email, senha} = req.body;
         const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
@@ -90,9 +90,9 @@ const atualizar = async (req, res) => {
 }
 
 //Deletar
-const deletar = async (req, res) => {
+const deletarPerfil = async (req, res) => {
     try {       
-        const {id} = req.aluno.params;
+        const id = req.aluno.id;
         const aluno = await Aluno.findByPk(id)  //Verifica a chave primaria no banco de dados se é igual ao solicitado na req.
         if(!aluno){
             return res.status(404).json({msg: 'Aluno não encontrado'})
@@ -117,4 +117,4 @@ const deletar = async (req, res) => {
 //     }
 // }
 
-module.exports = { cadastrar, atualizar, deletar, listarPorId, login};
+module.exports = { cadastrar, atualizarPerfil, deletarPerfil, listarPerfil, login};

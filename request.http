@@ -1,10 +1,9 @@
-### Rota GET para listar aluno
-
-GET http://localhost:3000/api/aluno
+### Rota GET para listar aluno OBS:(inserir o token de login no Authorization: Bearer )
+GET http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
+Authorization: Bearer 
 
 ### Rota Post para cadastrar aluno
-
 POST http://localhost:3000/api/aluno/cadastrar
 Content-Type: application/json
 
@@ -15,9 +14,10 @@ Content-Type: application/json
     "senha": "12345678"
 }
 
-### Rota PUT para atualizar informações
-PUT http://localhost:3000/api/aluno/editar/1
+### Rota PUT para atualizar informações OBS:(inserir o token de login no Authorization: Bearer )
+PUT http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
+Bearer
 
 {
     "nome": "José Editado",
@@ -27,12 +27,9 @@ Content-Type: application/json
 }
 
 ### Rota DELETE para atualizar informações
-DELETE http://localhost:3000/api/aluno/deletar/1
+DELETE http://localhost:3000/api/aluno/perfil
 Content-Type: application/json
 
-### Rota DELETE para atualizar informações
-DELETE http://localhost:3000/api/aluno/deletar
-Content-Type: application/json
 
 ### login aluno
 POST http://localhost:3000/api/aluno/login
